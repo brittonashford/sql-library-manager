@@ -31,7 +31,7 @@ const sequelize = new Sequelize({
 
 //check DB connection and sync
 //IIFE because await must occur in a function
-(async() => {
+(async () => {
   try{
     await sequelize.authenticate();
     console.log('Connection was sucessful.');
