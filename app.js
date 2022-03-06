@@ -64,7 +64,7 @@ if (err) {
 if (err.status === 404) {  
   res.status(404).render('page-not-found', {err});
 } else {
-  err.status = error.status || 500;
+  err.status = err.status || 500;
   err.message = err.message || 'An error occured processing your request';
   render('error', {err});
 }
