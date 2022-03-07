@@ -31,6 +31,7 @@ form a.button, input[type=submit] {
 
 input[type=submit] {
   border: 0;
+  font-weight: bold;
 }
 
   a.button:hover, input[type=submit]:hover {

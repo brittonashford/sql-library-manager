@@ -66,7 +66,7 @@ if (err.status === 404) {
 } else {
   err.status = err.status || 500;
   err.message = err.message || 'An error occured processing your request';
-  render('error', {err});
+  res.render('error', {err});
 }
 });
 
