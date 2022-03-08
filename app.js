@@ -47,38 +47,23 @@ const sequelize = new Sequelize({
 })();
  
 //404 error handler
-app.use((req, res, next) => {
-  const error = new Error();
-  error.status = 404;
-  error.message = 'Page not found.';
+app.use((req, res) => {
   console.log('404 error handler hit');
-  // res.render('page-not-found', {error}); 
-  next(error);
+  const error = new Error('Page not found.');
+  error.status = 404;
+  res.status(404).render('page-not-found', {error}); 
 });
 
 //global error handler
 app.use((err, req, res, next) => {
-if (err) {
-  console.log('Global error handler hit', {err});
-}
-if (err.status === 404) {  
-  res.status(404).render('page-not-found', {err});
-} else {
-  err.status = err.status || 500;
-  err.message = err.message || 'An error occured processing your request';
-  res.render('error', {err});
-}
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  //render the error page
-  res.status(err.status || 500);
-  res.render('error', {err});
+  if (err.status === 404) {  
+    res.status(404).render('page-not-found', {err});
+  } else {
+    console.log('Global error handler hit');
+    err.message = err.message || 'A server error occured while processing your request';
+    res.locals.error = err;
+    res.status(err.status || 500).render('error', {err});
+  }
 });
 
 module.exports = app;

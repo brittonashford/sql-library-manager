@@ -25,12 +25,12 @@ router.get('/books', asyncHandler(async(req, res) => {
 }));
 
 //add book form GET request
-router.get('/books/new-book', function(req, res, next){
+router.get('/books/new', function(req, res, next){
   res.render('new-book', {book: {}, title: 'Add New Book'});
 })
 
 //add book POST request
-router.post('/books/new-book', asyncHandler(async(req, res) => {
+router.post('/books/new', asyncHandler(async(req, res) => {
   let book;
   try {
     book = await Book.create(req.body);
